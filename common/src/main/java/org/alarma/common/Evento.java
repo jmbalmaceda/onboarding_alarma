@@ -1,3 +1,5 @@
+package org.alarma.common;
+
 import java.time.LocalDateTime;
 
 public abstract class Evento {
