@@ -10,8 +10,4 @@ public class EventoTemperatura extends Evento {
 		super(id, time, data);
 	}
 
-	@Override
-	public Object getData() {
-		return this.getData();
-	}
 }

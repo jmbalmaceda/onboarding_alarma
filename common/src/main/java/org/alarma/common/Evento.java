@@ -16,6 +16,8 @@ public abstract class Evento {
         this.data = data;
     }
 
-    public abstract Object getData();
+    public Object getData() {
+        return this.data;
+    };
 
 }
