@@ -16,6 +16,10 @@ public abstract class Evento {
         this.data = data;
     }
 
+    public String getId() {
+        return this.id;
+    }
+
     public Object getData() {
         return this.data;
     };

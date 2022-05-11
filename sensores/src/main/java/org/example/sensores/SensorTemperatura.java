@@ -1,7 +1,7 @@
 package org.example.sensores;
 
-import main.Sensor;
 import org.alarma.common.Central;
+import org.alarma.common.Sensor;
 
 import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
@@ -17,7 +17,8 @@ public class SensorTemperatura extends Sensor {
 		this.central = central;
 	}
 
-	public void iniciar() throws InterruptedException {
+	@Override
+	public void run() {
 
 		while (true) {
 			Double value = Math.random();
@@ -27,7 +28,11 @@ public class SensorTemperatura extends Sensor {
 			this.central.sendEvent(e);
 
 			// sleep
-			TimeUnit.SECONDS.sleep(1);
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 

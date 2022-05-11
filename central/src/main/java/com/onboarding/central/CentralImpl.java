@@ -8,6 +8,6 @@ public class CentralImpl implements Central {
 
     @Override
     public void sendEvent(Evento evento) {
-        System.out.println(evento.getData());
+        System.out.println("Evento id = " + evento.getId() + ", data = " + evento.getData());
     }
 }
