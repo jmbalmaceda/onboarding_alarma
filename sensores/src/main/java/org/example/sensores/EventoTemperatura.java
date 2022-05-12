@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 public class EventoTemperatura extends Evento {
 
-	public EventoTemperatura(String id, LocalDateTime time, Double data) {
-		super(id, time, data);
+	public EventoTemperatura(String id, String name, LocalDateTime time, Double data) {
+		super(id, name, time, data);
 	}
 
 }

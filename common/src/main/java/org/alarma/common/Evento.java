@@ -6,12 +6,15 @@ public abstract class Evento {
 
     String id;
 
+    String name;
+
     LocalDateTime time;
 
     Object data;
 
-    public Evento(String id, LocalDateTime time, Object data) {
+    public Evento(String id, String name, LocalDateTime time, Object data) {
         this.id = id;
+        this.name = name;
         this.time = time;
         this.data = data;
     }
@@ -22,6 +25,10 @@ public abstract class Evento {
 
     public Object getData() {
         return this.data;
-    };
+    }
+
+    public String getName() {
+        return this.name;
+    }
 
 }

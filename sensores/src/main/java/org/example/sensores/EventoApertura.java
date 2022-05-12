@@ -6,8 +6,8 @@ import java.time.LocalDateTime;
 
 public class EventoApertura extends Evento {
 
-	public EventoApertura(String id, LocalDateTime time, Boolean data) {
-		super(id, time, data);
+	public EventoApertura(String id, String name, LocalDateTime time, Boolean data) {
+		super(id, name, time, data);
 	}
 
 }

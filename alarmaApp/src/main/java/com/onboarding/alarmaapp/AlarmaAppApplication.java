@@ -21,12 +21,16 @@ public class AlarmaAppApplication {
         ConfigurableApplicationContext context = SpringApplication.run(AlarmaAppApplication.class, args);
         Central central = context.getBean(Central.class);
         Sensor sensor = context.getBean(Sensor.class);
+        sensor.setSensorName("Sensor 1");
         Sensor sensorTemperatura = context.getBean(SensorTemperatura.class);
+        sensorTemperatura.setSensorName("Temperatura 1");
         Sensor sensorApertura = context.getBean(SensorApertura.class);
+        sensorApertura.setSensorName("Apertura 1");
         sensorApertura.start();
         sensorTemperatura.start();
 
         Sensor sensorTemperatura2 = context.getBean(SensorTemperatura.class);
+        sensorTemperatura2.setSensorName("Temperatura 2");
         sensorTemperatura2.start();
     }
 
@@ -37,6 +41,7 @@ public class AlarmaAppApplication {
 
     @Bean
     @Scope("prototype")
+    @Primary
     public SensorTemperatura getSensorTemperatura(Central central) {
         String id = UUID.randomUUID().toString();
         return new SensorTemperatura(id, central);

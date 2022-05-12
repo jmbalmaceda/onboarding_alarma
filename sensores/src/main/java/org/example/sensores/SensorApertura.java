@@ -11,10 +11,8 @@ public class SensorApertura extends Sensor {
 
     private Central central;
 
-    private String id;
-
     public SensorApertura(String id, Central central) {
-        this.id = id;
+        super.sensorId = id;
         this.central = central;
     }
 
@@ -24,7 +22,7 @@ public class SensorApertura extends Sensor {
         while (true) {
             Boolean value = (Math.random() < 0.5);
             LocalDateTime now = LocalDateTime.now();
-            Evento e = new EventoApertura(this.id, now, value);
+            Evento e = new EventoApertura(this.getSensorId(), this.getSensorName(), now, value);
 
             this.central.sendEvent(e);
 

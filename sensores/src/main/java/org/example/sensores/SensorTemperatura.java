@@ -10,10 +10,8 @@ public class SensorTemperatura extends Sensor {
 
 	private Central central;
 
-	private String id;
-
 	public SensorTemperatura(String id, Central central) {
-		this.id = id;
+		super.sensorId = id;
 		this.central = central;
 	}
 
@@ -23,7 +21,7 @@ public class SensorTemperatura extends Sensor {
 		while (true) {
 			Double value = Math.random();
 			LocalDateTime now = LocalDateTime.now();
-			EventoTemperatura e = new EventoTemperatura(this.id, now, value);
+			EventoTemperatura e = new EventoTemperatura(this.getSensorId(), this.getSensorName(), now, value);
 
 			this.central.sendEvent(e);
 
