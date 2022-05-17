@@ -4,4 +4,6 @@ public interface Central {
 
     void sendEvent(Evento e);
 
+    void addAlarma(Alarma a);
+
 }

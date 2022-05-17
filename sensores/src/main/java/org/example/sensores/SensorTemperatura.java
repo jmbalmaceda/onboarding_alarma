@@ -19,7 +19,7 @@ public class SensorTemperatura extends Sensor {
 	public void run() {
 
 		while (true) {
-			Double value = Math.random();
+			Double value = Math.random() * 50;
 			LocalDateTime now = LocalDateTime.now();
 			EventoTemperatura e = new EventoTemperatura(this.getSensorId(), this.getSensorName(), now, value);
 

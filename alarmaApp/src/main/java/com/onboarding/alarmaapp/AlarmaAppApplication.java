@@ -1,5 +1,6 @@
 package com.onboarding.alarmaapp;
 
+import com.onboarding.central.AlarmaTemperatura;
 import com.onboarding.central.CentralImpl;
 import org.alarma.common.Central;
 import org.alarma.common.Sensor;
@@ -12,19 +13,28 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
 @SpringBootApplication
 public class AlarmaAppApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException {
+        String nombreAlarma = "";
+        String valorComparacion = "";
+
         ConfigurableApplicationContext context = SpringApplication.run(AlarmaAppApplication.class, args);
         Central central = context.getBean(Central.class);
+        AlarmaTemperatura alarmaTemperatura  = (AlarmaTemperatura) context.getBean("getAlarmaTemperatura");
+        Object a = Class.forName("com.onboarding.central.AlarmaTemperatura").getConstructors()[0].newInstance();
+        alarmaTemperatura.setValue(30d);
+        central.addAlarma(alarmaTemperatura);
         Sensor sensor = context.getBean(Sensor.class);
         sensor.setSensorName("Sensor 1");
         Sensor sensorTemperatura = context.getBean(SensorTemperatura.class);
         sensorTemperatura.setSensorName("Temperatura 1");
-        Sensor sensorApertura = context.getBean(SensorApertura.class);
+        Sensor sensorApertura = (Sensor) context.getBean("getSensorApertura");
+        //Sensor sensorApertura = context.getBean(SensorApertura.class);
         sensorApertura.setSensorName("Apertura 1");
         sensorApertura.start();
         sensorTemperatura.start();
@@ -52,6 +62,12 @@ public class AlarmaAppApplication {
     public SensorApertura getSensorApertura(Central central) {
         String id = UUID.randomUUID().toString();
         return new SensorApertura(id, central);
+    }
+
+    @Bean
+    @Scope("prototype")
+    public AlarmaTemperatura getAlarmaTemperatura() {
+        return new AlarmaTemperatura();
     }
 
 }
