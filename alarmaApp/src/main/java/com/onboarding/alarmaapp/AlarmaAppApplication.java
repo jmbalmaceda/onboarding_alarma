@@ -20,14 +20,11 @@ import java.util.UUID;
 public class AlarmaAppApplication {
 
     public static void main(String[] args) throws ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        String nombreAlarma = "";
-        String valorComparacion = "";
-
         ConfigurableApplicationContext context = SpringApplication.run(AlarmaAppApplication.class, args);
         Central central = context.getBean(Central.class);
-        AlarmaTemperatura alarmaTemperatura  = (AlarmaTemperatura) context.getBean("getAlarmaTemperatura");
-        Object a = Class.forName("com.onboarding.central.AlarmaTemperatura").getConstructors()[0].newInstance();
-        alarmaTemperatura.setValue(30d);
+        AlarmaTemperatura alarmaTemperatura = (AlarmaTemperatura) Class.forName(context.getEnvironment().getProperty("alarm.type")).getConstructors()[0].newInstance();
+        Double temperature = Double.parseDouble(context.getEnvironment().getProperty("alarm.temperature","40"));
+        alarmaTemperatura.setValue(temperature);
         central.addAlarma(alarmaTemperatura);
         Sensor sensor = context.getBean(Sensor.class);
         sensor.setSensorName("Sensor 1");
