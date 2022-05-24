@@ -1,5 +1,6 @@
 package com.onboarding.alarmaapp;
 
+import com.onboarding.central.AlarmaMultiple;
 import com.onboarding.central.AlarmaTemperatura;
 import com.onboarding.central.CentralImpl;
 import org.alarma.common.Central;
@@ -25,20 +26,22 @@ public class AlarmaAppApplication {
         AlarmaTemperatura alarmaTemperatura = (AlarmaTemperatura) Class.forName(context.getEnvironment().getProperty("alarm.type")).getConstructors()[0].newInstance();
         Double temperature = Double.parseDouble(context.getEnvironment().getProperty("alarm.temperature","40"));
         alarmaTemperatura.setValue(temperature);
+
+        AlarmaMultiple alarmaMultiple = (AlarmaMultiple) Class.forName(context.getEnvironment().getProperty("alarm.multiple.type")).getConstructors()[0].newInstance();
+        alarmaMultiple.setValue(temperature);
         central.addAlarma(alarmaTemperatura);
+        central.addAlarma(alarmaMultiple);
         Sensor sensor = context.getBean(Sensor.class);
         sensor.setSensorName("Sensor 1");
         Sensor sensorTemperatura = context.getBean(SensorTemperatura.class);
         sensorTemperatura.setSensorName("Temperatura 1");
         Sensor sensorApertura = (Sensor) context.getBean("getSensorApertura");
-        //Sensor sensorApertura = context.getBean(SensorApertura.class);
         sensorApertura.setSensorName("Apertura 1");
         sensorApertura.start();
         sensorTemperatura.start();
-
-        Sensor sensorTemperatura2 = context.getBean(SensorTemperatura.class);
-        sensorTemperatura2.setSensorName("Temperatura 2");
-        sensorTemperatura2.start();
+        Sensor sensorApertura2 = (Sensor) context.getBean("getSensorApertura");
+        sensorApertura2.setSensorName("Apertura 2");
+        sensorApertura2.start();
     }
 
     @Bean
