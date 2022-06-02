@@ -43,4 +43,18 @@ public class PersonController {
         List<Person> result = personRepository.findAll(e);
         return ResponseEntity.ok().body(result);
     }
+
+    @GetMapping("/age/{age}")
+    public ResponseEntity<List<Person>> getByAge(@PathVariable(name = "age") Integer age){
+        Person person = new Person();
+        person.setAge(age);
+        Example e = Example.of(person);
+        List<Person> result = personRepository.findAll(e);
+        return ResponseEntity.ok().body(result);
+    }
+
+    @GetMapping("/temperature/{temperature}")
+    public ResponseEntity<List<Person>> getByAge(@PathVariable(name = "temperature") Float temperature){
+        return null;
+    }
 }
