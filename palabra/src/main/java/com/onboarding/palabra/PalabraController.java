@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class PalabraController {
 
     @GetMapping("{value}")
-    public ResponseEntity<String> change(@PathVariable(name = "value") String value){
+    public ResponseEntity<String> change(@PathVariable(name = "value") String value) throws InterruptedException {
+        Thread.sleep(5000);
         String result = value + "_modificado";
         return ResponseEntity.ok().body(result);
     }
